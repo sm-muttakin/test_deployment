@@ -1,0 +1,28 @@
+// ============================================================
+// Prisma Schema — Dynamic Leaderboard
+// ============================================================
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // DATABASE_URL is loaded from the .env file
+  url      = env("DATABASE_URL")
+}
+
+// ----------------------------------------------------------
+// Submission Model
+// Represents a single team's leaderboard entry.
+// ----------------------------------------------------------
+model Submission {
+  id             String   @id @default(uuid())   // UUID primary key
+  teamName       String   @unique                // Enforce uniqueness to prevent duplicates
+  accuracyScore  Float                            // Accuracy (0.0 – 100.0)
+  submissionTime DateTime @default(now())        // Auto-set to creation time
+
+  @@index([accuracyScore(sort: Desc), submissionTime(sort: Asc)])
+  @@map("submissions") // Maps to the "submissions" table in Postgres
+}
