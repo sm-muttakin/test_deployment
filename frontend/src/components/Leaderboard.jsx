@@ -180,7 +180,7 @@ export default function Leaderboard({ refreshTrigger }) {
 
   const fetchLeaderboard = async () => {
     try {
-      const { data } = await axios.get('/api/leaderboard');
+      const { data } = await axios.get('https://test-deployment-bkw1.onrender.com/api/leaderboard');
       
       // Detect genuinely new submissions to show "NEW" badge
       const incoming = new Set(data.map((s) => s.id));

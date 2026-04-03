@@ -50,7 +50,7 @@ export default function SubmissionForm({ onSubmitSuccess }) {
 
     setLoading(true);
     try {
-      await axios.post('/api/submissions', {
+      await axios.post('https://test-deployment-bkw1.onrender.com/api/submissions', {
         teamName: trimmedName,
         accuracyScore: parsedScore,
       });
